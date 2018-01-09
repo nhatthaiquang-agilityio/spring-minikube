@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: student-service
+  labels:
+    run: student-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: student-service
+    spec:
+      containers:
+      - name: student-service
+        image: nhatthai/student-service:latest
+        ports:
+        - containerPort: 7000
+          protocol: TCP

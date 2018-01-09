@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rating-service
+  labels:
+    run: rating-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: rating-service
+    spec:
+      containers:
+      - name: rating-service
+        image: nhatthai/rating-service:latest
+        ports:
+        - containerPort: 5000
+          protocol: TCP
