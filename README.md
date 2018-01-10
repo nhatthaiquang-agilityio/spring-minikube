@@ -45,10 +45,21 @@ Create and Expose student-service
 $ kubectl expose deployment student-service --type=NodePort
 ```
 
+or
+```
+$ cd devops
+$ kubectl create -f service-student.yml
+```
 
 Create and Expose rating-service
 ```
 $ kubectl expose deployment rating-service --type=NodePort
+```
+
+or
+```
+$ cd devops
+$ kubectl create -f service-rating.yml
 ```
 
 
