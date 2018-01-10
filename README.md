@@ -87,18 +87,22 @@ $ kubectl describe ing
 ```
 ![Ingress](https://github.com/nhatthai/spring-minikube/blob/master/images/status-ingress.png "Ingress")
 
+Enable Ingress
+```
+$ minikube addons enable ingress
+```
+
+```
+$ minikube ip
+192.168.99.100
+```
+
 Add mysite.com into /etc/hosts
 ```
 192.168.99.100 mysite.com
 ```
 Check browser: `http://mysite.com/student/hi`
 
-
-### Notes:
-Enable Ingress
-```
-$ minikube addons enable ingress
-```
 
 ### Reference
 [Microservices with kubernetes and docker](https://piotrminkowski.wordpress.com/2017/03/31/microservices-with-kubernetes-and-docker/)
