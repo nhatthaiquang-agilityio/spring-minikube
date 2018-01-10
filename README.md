@@ -4,13 +4,29 @@
     Rating Service
 
 
+### Requirements
+    Java: JDK 1.8
+    Maven Build
+
 # Usage
+
+Build Student Service
+```
+$ cd rating-service
+$ mvn package
+```
 
 Create docker images for Student Service and push Docker Hub
 ```
 $ cd student-service
 $ docker build -t nhatthai/student-service .
 $ docker push nhatthai/student-service
+```
+
+Build Rating Service
+```
+$ cd rating-service
+$ mvn package
 ```
 
 Create docker images for Rating Service and push Docker Hub
