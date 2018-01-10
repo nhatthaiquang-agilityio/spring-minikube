@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rating-service
+spec:
+  clusterIP: None
+  selector:
+    run: rating-service
+  ports:
+    - name: port1
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
