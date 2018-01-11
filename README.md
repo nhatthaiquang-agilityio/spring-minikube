@@ -8,55 +8,52 @@
     Java: JDK 1.8
     Maven Build
 
-# Usage
+### Usage
 
-Build Student Service
+##### Build Student Service
 ```
 $ cd rating-service
 $ mvn package
 ```
 
-Create docker images for Student Service and push Docker Hub
+##### Create docker images for Student Service and push Docker Hub
 ```
 $ cd student-service
 $ docker build -t nhatthai/student-service .
 $ docker push nhatthai/student-service
 ```
 
-Build Rating Service
+##### Build Rating Service
 ```
 $ cd rating-service
 $ mvn package
 ```
 
-Create docker images for Rating Service and push Docker Hub
+##### Create docker images for Rating Service and push Docker Hub
 ```
 $ cd rating-service
 $ docker build -t nhatthai/rating-service .
 $ docker push nhatthai/rating-service
 ```
 
-Start Minikube
+##### Start Minikube
 ```
 $ minikube start
 ```
 
-
-Create student-service deployment
+##### Create student-service deployment
 ```
 $ cd devops
 $ kubectl create -f deployment-student.yml
 ```
 
-
-Create rating-service deployment
+##### Create rating-service deployment
 ```
 $ cd devops
 $ kubectl create -f deployment-rating.yml
 ```
 
-
-Create and Expose student-service
+##### Create and Expose student-service
 ```
 $ kubectl expose deployment student-service --type=NodePort
 ```
@@ -67,7 +64,7 @@ $ cd devops
 $ kubectl create -f service-student.yml
 ```
 
-Create and Expose rating-service
+##### Create and Expose rating-service
 ```
 $ kubectl expose deployment rating-service --type=NodePort
 ```
@@ -79,7 +76,7 @@ $ kubectl create -f service-rating.yml
 ```
 
 
-Check service
+##### Check service
 ```
 $ minikube service student-service --url
 ```
@@ -89,21 +86,19 @@ Give me url `http://192.168.99.100:30676` and Check rest-api http://192.168.99.1
 $ kubectl describe service student-service
 ```
 
-
-Create Ingress
+##### Create Ingress
 ```
 $ cd devops
 $ kubectl create -f ingress.yml
 ```
 
-
-Check Ingress
+##### Check Ingress
 ```
 $ kubectl describe ing
 ```
 ![Ingress](https://github.com/nhatthai/spring-minikube/blob/master/images/status-ingress.png "Ingress")
 
-Enable Ingress
+##### Enable Ingress
 ```
 $ minikube addons enable ingress
 ```
@@ -113,7 +108,7 @@ $ minikube ip
 192.168.99.100
 ```
 
-Add mysite.com into /etc/hosts
+##### Add mysite.com into /etc/hosts
 ```
 192.168.99.100 mysite.com
 ```
