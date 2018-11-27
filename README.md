@@ -86,10 +86,92 @@ Give me url `http://192.168.99.100:30676` and Check rest-api http://192.168.99.1
 $ kubectl describe service student-service
 ```
 
-##### Create Ingress
+### Ingress
+#### Create Ingress
 ```
 $ cd devops
 $ kubectl create -f ingress.yml
+```
+
+#### Using Basic Auth Ingress
+##### Create htpasswd file
+```
+$ htpasswd -c auth example
+New password: <bar>
+New password:
+Re-type new password:
+Adding password for user foo
+```
+
+##### Create secret
+```
+$ kubectl create secret generic basic-auth --from-file=auth
+secret "basic-auth" created
+```
+
+##### Get Secert (make sure that the auth secret was created)
+```
+$ kubectl get secret basic-auth -o yaml
+```
+
+##### Create basic auth ingress
+```
+$ cd devops
+$ kubectl create -f basic-auth-ingress.yml
+```
+
+##### Check Ingress
+```
+ curl -v http://192.168.99.100/student/hi -H 'Host: mysite.com'
+*   Trying 192.168.99.100...
+* TCP_NODELAY set
+* Connected to 192.168.99.100 (192.168.99.100) port 80 (#0)
+> GET /student/hi HTTP/1.1
+> Host: mysite.com
+> User-Agent: curl/7.54.0
+> Accept: */*
+>
+< HTTP/1.1 401 Unauthorized
+< Server: nginx/1.13.6
+< Date: Tue, 27 Nov 2018 03:43:30 GMT
+< Content-Type: text/html
+< Content-Length: 195
+< Connection: keep-alive
+< WWW-Authenticate: Basic realm="Authentication Required - Example"
+<
+<html>
+<head><title>401 Authorization Required</title></head>
+<body bgcolor="white">
+<center><h1>401 Authorization Required</h1></center>
+<hr><center>nginx/1.13.6</center>
+</body>
+</html>
+* Connection #0 to host 192.168.99.100 left intact
+```
+
+##### Add user & pass
+```
+curl -v http://192.168.99.100/student/hi -H 'Host: mysite.com' -u 'example:example'
+*   Trying 192.168.99.100...
+* TCP_NODELAY set
+* Connected to 192.168.99.100 (192.168.99.100) port 80 (#0)
+* Server auth using Basic with user 'example'
+> GET /student/hi HTTP/1.1
+> Host: mysite.com
+> Authorization: Basic ZXhhbXBsZTpleGFtcGxl
+> User-Agent: curl/7.54.0
+> Accept: */*
+>
+< HTTP/1.1 200
+< Server: nginx/1.13.6
+< Date: Tue, 27 Nov 2018 03:44:38 GMT
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 10
+< Connection: keep-alive
+< X-Application-Context: student-service:7000
+<
+* Connection #0 to host 192.168.99.100 left intact
+Hi Student%
 ```
 
 ##### Check Ingress
