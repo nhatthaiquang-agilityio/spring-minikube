@@ -7,6 +7,8 @@
 ### Requirements
     Java: JDK 1.8
     Maven Build
+    Docker
+    Kubernetes: Minikube on local
 
 ### Usage
 
@@ -86,7 +88,9 @@ Give me url `http://192.168.99.100:30676` and Check rest-api http://192.168.99.1
 $ kubectl describe service student-service
 ```
 
-### Ingress
+### Ingress Controller
+Create Ingress or Basic Authentication Ingress
+
 #### Create Ingress
 ```
 $ cd devops
@@ -94,13 +98,15 @@ $ kubectl create -f ingress.yml
 ```
 
 #### Using Basic Auth Ingress
+Add user & pass when we reach the site.
+
 ##### Create htpasswd file
 ```
 $ htpasswd -c auth example
 New password: <bar>
 New password:
 Re-type new password:
-Adding password for user foo
+Adding password for user example
 ```
 
 ##### Create secret
@@ -203,3 +209,5 @@ Check browser: `http://mysite.com/student/hi`
 [Setting up Ingress on Minikube](https://medium.com/@Oskarr3/setting-up-ingress-on-minikube-6ae825e98f82)
 
 [Basic Authentication Ingress](https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/examples/auth)
+
+[Nginx Ingress Controller](http://rahmonov.me/posts/nginx-ingress-controller/)
